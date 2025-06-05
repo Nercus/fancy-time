@@ -18,7 +18,6 @@ export function useRandomImage() {
     const randomImage = getRandomImage();
     // set random image to the body background
     document.body.style.backgroundImage = `url(${randomImage})`;
-    document.body.style.backgroundSize = 'cover';
   }
 
   return {

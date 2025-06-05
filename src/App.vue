@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col justify-center items-center px-4 w-full h-dvh overflow-hidden background">
+  <div class="relative flex flex-col justify-center items-center px-4 w-full min-h-screen">
     <div
       class="flex flex-row justify-evenly items-center gap-10 shadow px-4 pseudo-border border-r-2 border-b-6 border-black/5 w-full min-w-fit max-w-md overflow-visible glass"
       :class="{
