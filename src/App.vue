@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col justify-center items-center px-4 w-full min-h-screen">
+  <div class="relative flex flex-col justify-center items-center px-4 w-full min-h-screen padding-save">
     <div
       class="flex flex-row justify-evenly items-center gap-10 shadow px-4 pseudo-border border-r-2 border-b-6 border-black/5 w-full min-w-fit max-w-md overflow-visible glass"
       :class="{
@@ -65,5 +65,9 @@ const breakpoints = useBreakpoints(breakpointsTailwind)
   height: 100%;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.padding-save {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 </style>
