@@ -1,19 +1,22 @@
 <template>
-  <TimeSegment :elements="elements" v-model="month" />
+  <div class="flex flex-row gap-2">
+    <DotNumber :digit="firstDigit" />
+    <DotNumber :digit="secondDigit" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import TimeSegment from './TimeSegment.vue';
-import { useTimestamp } from '@vueuse/core';
-import { ref } from 'vue';
+import { useTimestamp } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import DotNumber from './DotNumber.vue'
 
-const month = ref(0);
+const month = ref(0)
 useTimestamp({
   callback: (ts) => {
-    month.value = new Date(ts).getMonth();
-  }
-});
+    month.value = new Date(ts).getMonth() + 1
+  },
+})
 
-// Months: 01, 02, ..., 12
-const elements = Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'));
+const firstDigit = computed(() => Math.floor(month.value / 10))
+const secondDigit = computed(() => month.value % 10)
 </script>

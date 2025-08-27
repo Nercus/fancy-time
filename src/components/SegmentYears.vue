@@ -1,24 +1,26 @@
 <template>
-  <TimeSegment :elements="elements" v-model="yearIndex" />
+  <div class="flex flex-row gap-2">
+    <DotNumber :digit="firstDigit" />
+    <DotNumber :digit="secondDigit" />
+    <DotNumber :digit="thirdDigit" />
+    <DotNumber :digit="fourthDigit" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import TimeSegment from './TimeSegment.vue';
-import { useTimestamp } from '@vueuse/core';
-import { ref } from 'vue';
+import { useTimestamp } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import DotNumber from './DotNumber.vue'
 
-// Define a range of years, e.g., 1970 to 2070
-const startYear = 1970;
-const endYear = 2070;
-const elements = Array.from({ length: endYear - startYear + 1 }, (_, i) => String(startYear + i));
-
-// The index of the current year in the elements array
-const yearIndex = ref(0);
-
+const year = ref(0)
 useTimestamp({
   callback: (ts) => {
-    const currentYear = new Date(ts).getFullYear();
-    yearIndex.value = Math.max(0, Math.min(currentYear - startYear, elements.length - 1));
-  }
-});
+    year.value = new Date(ts).getFullYear()
+  },
+})
+
+const firstDigit = computed(() => Math.floor(year.value / 1000))
+const secondDigit = computed(() => Math.floor(year.value / 100) % 10)
+const thirdDigit = computed(() => Math.floor(year.value / 10) % 10)
+const fourthDigit = computed(() => year.value % 10)
 </script>

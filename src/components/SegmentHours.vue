@@ -1,19 +1,22 @@
 <template>
-  <TimeSegment :elements="elements" v-model="hours" />
+  <div class="flex flex-row gap-2">
+    <DotNumber :digit="firstDigit" />
+    <DotNumber :digit="secondDigit" />
+  </div>
 </template>
 
 <script setup lang="ts">
-import TimeSegment from './TimeSegment.vue';
-import { useTimestamp } from '@vueuse/core';
-import { ref } from 'vue';
+import { useTimestamp } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import DotNumber from './DotNumber.vue'
 
 const hours = ref(0)
 useTimestamp({
   callback: (ts) => {
-    hours.value = new Date(ts).getHours();
-  }
-});
+    hours.value = new Date(ts).getHours()
+  },
+})
 
-// 24-hour format: 00, 01, ..., 23
-const elements = Array.from({ length: 24 }, (_, i) => String(i).padStart(2, '0'));
+const firstDigit = computed(() => Math.floor(hours.value / 10))
+const secondDigit = computed(() => hours.value % 10)
 </script>
