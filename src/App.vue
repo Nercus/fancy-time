@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col justify-center items-center gap-2 px-4 w-full max-w-3xl min-h-dvh">
+  <div class="relative flex flex-col justify-center items-center gap-2 px-4 w-full max-w-3xl h-full">
     <div v-if="breakpoints.lg.value" class="flex flex-row justify-center items-center gap-2 w-fit">
       <SegmentDays />
       <DotNumber digit="dot" />
