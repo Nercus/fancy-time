@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-col justify-center items-center gap-2 px-4 w-full max-w-3xl min-h-screen padding-save">
+  <div class="relative flex flex-col justify-center items-center gap-2 px-4 w-full max-w-3xl min-h-dvh">
     <div v-if="breakpoints.lg.value" class="flex flex-row justify-center items-center gap-2 w-fit">
       <SegmentDays />
       <DotNumber digit="dot" />
@@ -38,9 +38,3 @@ onMounted(() => {
 
 const breakpoints = useBreakpoints(breakpointsTailwind)
 </script>
-
-<style scoped>
-.padding-save {
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-}
-</style>
