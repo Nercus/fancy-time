@@ -15,8 +15,16 @@ const dominantColor = ref<string | null>(null)
 export function useRandomImage() {
   async function init() {
     randomImage.value = getRandomImage()
-    document.body.style.backgroundImage = `url(${randomImage.value})`
+    // Preload the image
+    await preloadImage(randomImage.value)
+    // Get dominant color before showing image
     dominantColor.value = await getDominantColor()
+    if (dominantColor.value) {
+      document.body.style.backgroundColor = dominantColor.value
+      document.getElementById('themeMetaTag')?.setAttribute('content', dominantColor.value)
+    }
+    // Now set the background image
+    document.body.style.backgroundImage = `url(${randomImage.value})`
   }
 
   async function getDominantColor() {
@@ -27,6 +35,15 @@ export function useRandomImage() {
   function getRandomImage(): string {
     const randomIndex = Math.floor(Math.random() * images.length)
     return images[randomIndex] as string
+  }
+
+  function preloadImage(src: string): Promise<void> {
+    return new Promise((resolve) => {
+      const img = new window.Image()
+      img.src = src
+      img.onload = () => resolve()
+      img.onerror = () => resolve()
+    })
   }
 
   return {
