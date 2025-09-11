@@ -78,6 +78,9 @@ useSeoMeta({
   ogTitle: 'Noise Clock',
   ogDescription: 'A noise style clock and calendar built with Vue 3 and Tailwind CSS.',
   ogImage,
+  ogUrl: window.location.href,
+  ogSiteName: 'Nerc\'s clock',
+  ogType: 'website',
 })
 
 const time = useTime()
