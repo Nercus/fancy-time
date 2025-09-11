@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-row justify-center items-center gap-2 w-full">
+  <main class="flex flex-row justify-center items-center gap-2 w-full">
     <slot v-if="breakpoints['2xl'].value" name="day" />
     <slot v-if="breakpoints['2xl'].value" name="date-separator" />
     <slot v-if="breakpoints['2xl'].value" name="month" />
@@ -11,7 +11,7 @@
     <slot name="minute" />
     <slot name="time-separator" />
     <slot name="second" />
-  </div>
+  </main>
 </template>
 
 <script lang="ts" setup>

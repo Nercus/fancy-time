@@ -1,12 +1,12 @@
 <template>
-  <div class="bottom-0 absolute inset-x-0 flex flex-row justify-between items-center p-10 w-full">
+  <footer class="bottom-0 absolute inset-x-0 flex flex-row justify-between items-center p-10 w-full">
     <button class="cursor-pointer" @click="goBack">
       <slot name="back" />
     </button>
     <button class="cursor-pointer" @click="goNext">
       <slot name="next" />
     </button>
-  </div>
+  </footer>
 </template>
 
 <script setup lang="ts">
