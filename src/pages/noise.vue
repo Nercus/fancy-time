@@ -65,6 +65,14 @@ definePage({
 })
 
 const time = useTime()
+
+useSeoMeta({
+  title: 'Noise Clock',
+  description: 'A noise style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogTitle: 'Noise Clock',
+  ogDescription: 'A noise style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogImage: '../assets/noise.png',
+})
 </script>
 
 <style lang="css" scoped>

@@ -57,5 +57,13 @@ definePage({
   },
 })
 
+useSeoMeta({
+  title: 'Hand-Drawn Clock',
+  description: 'A hand-drawn style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogTitle: 'Hand-Drawn Clock',
+  ogDescription: 'A hand-drawn style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogImage: '../assets/handdrawn.png',
+})
+
 const time = useTime()
 </script>

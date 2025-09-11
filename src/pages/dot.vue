@@ -56,5 +56,13 @@ definePage({
   },
 })
 
+useSeoMeta({
+  title: 'Dots Clock',
+  description: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogTitle: 'Dots Clock',
+  ogDescription: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogImage: '../assets/dots.png',
+})
+
 const time = useTime()
 </script>

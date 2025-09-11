@@ -1,3 +1,4 @@
+import { createHead } from '@unhead/vue/client'
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from 'vue-router/auto-routes'
@@ -10,5 +11,7 @@ const router = createRouter({
 })
 
 const app = createApp(App)
+const head = createHead()
 app.use(router)
+app.use(head)
 app.mount('#app')

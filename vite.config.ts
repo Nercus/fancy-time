@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { unheadVueComposablesImports } from '@unhead/vue'
 import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
@@ -28,6 +29,7 @@ export default defineConfig({
         {
           'tailwind-merge': ['twMerge'],
         },
+        unheadVueComposablesImports,
       ],
       dirs: ['./src/composables'],
     }),
