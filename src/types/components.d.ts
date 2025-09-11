@@ -11,6 +11,7 @@ declare module 'vue' {
     DotSymbol: typeof import('./../components/DotSymbol.vue')['default']
     Icon: typeof import('./../components/Icon.vue')['default']
     Navigation: typeof import('./../components/Navigation.vue')['default']
+    NoiseSymbol: typeof import('./../components/NoiseSymbol.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SegmentDays: typeof import('./../components/SegmentDays.vue')['default']
@@ -19,6 +20,7 @@ declare module 'vue' {
     SegmentMonths: typeof import('./../components/SegmentMonths.vue')['default']
     SegmentSeconds: typeof import('./../components/SegmentSeconds.vue')['default']
     SegmentYears: typeof import('./../components/SegmentYears.vue')['default']
+    StapledSymbol: typeof import('../components/NoiseSymbol.vue')['default']
     Time: typeof import('./../components/Time.vue')['default']
   }
 }
