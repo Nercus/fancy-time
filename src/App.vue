@@ -1,53 +1,93 @@
 <template>
-  <Transition appear name="fade" mode="out-in">
-    <div class="relative flex flex-col justify-center items-center gap-2 px-4 w-full max-w-3xl h-full">
-      <div v-if="breakpoints.lg.value" class="flex flex-row justify-center items-center gap-2 w-fit">
-        <SegmentDays />
-        <DotNumber digit="dot" />
-        <SegmentMonths />
-        <DotNumber digit="dot" />
-        <SegmentYears />
-      </div>
-      <div class="flex flex-row justify-center items-center gap-2 w-fit">
-        <SegmentHours />
-        <DotNumber digit="separator" />
-        <SegmentMinutes />
-        <DotNumber digit="separator" />
-        <SegmentSeconds />
-      </div>
-    </div>
-  </Transition>
+  <RouterView v-slot="{ Component }">
+    <Transition :name="transitionName">
+      <component :is="Component" />
+    </Transition>
+  </RouterView>
 </template>
 
 <script setup lang="ts">
-import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
-import { onMounted } from 'vue'
-import DotNumber from './components/DotNumber.vue'
-import SegmentDays from './components/SegmentDays.vue'
-import SegmentHours from './components/SegmentHours.vue'
-import SegmentMinutes from './components/SegmentMinutes.vue'
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
-import SegmentMonths from './components/SegmentMonths.vue'
-import SegmentSeconds from './components/SegmentSeconds.vue'
-import SegmentYears from './components/SegmentYears.vue'
-import { useRandomImage } from './composables/useRandomImage'
+const route = useRoute()
+const router = useRouter()
+const transitionName = ref('slide-forward')
 
-const { init } = useRandomImage()
+let previousOrder = route.meta.order || 0
 
-onMounted(() => {
-  init()
+watch(route, (newRoute) => {
+  const routes = router.getRoutes()
+  const maxOrder = Math.max(...routes.map(r => (r.meta.order as number) ?? 0))
+  const currentOrder = newRoute.meta.order || 0
+
+  if (currentOrder === 0 && previousOrder === maxOrder) {
+    // Wrap-around: last to first (forward)
+    transitionName.value = 'slide-forward'
+  }
+  else if (currentOrder === maxOrder && previousOrder === 0) {
+    // Wrap-around: first to last (backward)
+    transitionName.value = 'slide-backward'
+  }
+  else if (currentOrder > previousOrder) {
+    transitionName.value = 'slide-forward'
+  }
+  else {
+    transitionName.value = 'slide-backward'
+  }
+
+  previousOrder = currentOrder
 })
-
-const breakpoints = useBreakpoints(breakpointsTailwind)
 </script>
 
-<style lang="css">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s;
+<style scoped>
+.slide-forward-enter-active,
+.slide-forward-leave-active {
+  transition: all 0.75s ease-out;
 }
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
+
+.slide-forward-enter-from {
+  position: absolute;
+  right: -100%;
+}
+
+.slide-forward-enter-to {
+  position: absolute;
+  right: 0;
+}
+
+.slide-forward-leave-from {
+  position: absolute;
+  left: 0;
+}
+
+.slide-forward-leave-to {
+  position: absolute;
+  left: -100%;
+}
+
+.slide-backward-enter-active,
+.slide-backward-leave-active {
+  transition: all 0.75s ease-out;
+}
+
+.slide-backward-enter-from {
+  position: absolute;
+  left: -100%;
+}
+
+.slide-backward-enter-to {
+  position: absolute;
+  left: 0;
+}
+
+.slide-backward-leave-from {
+  position: absolute;
+  right: 0;
+}
+
+.slide-backward-leave-to {
+  position: absolute;
+  right: -100%;
 }
 </style>

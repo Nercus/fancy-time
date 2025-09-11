@@ -1,34 +1,24 @@
 <!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
-  <motion.div
-    :transition="{ type: 'spring', duration: 0.75, bounce: 0.5 }"
-    :animate="{ scale }"
-    :while-hover="{ scale: 0.95 }"
-    class="size-8 sm:size-12 md:size-14 lg:size-20 2xl:size-36 xl:size-28 aspect-square">
-    <canvas
-      ref="canvasRef"
-      class="block bg-slate-200/80 shadow backdrop-blur-xs p-2 md:p-4 pseudo-border border-slate-200/90 border-r-2 border-b-6 rounded w-full h-auto aspect-square" />
-  </motion.div>
+  <canvas
+    ref="canvasRef"
+    class="size-20 aspect-square" />
 </template>
 
 <script setup lang="ts">
 import type { DotSymbols } from '../composables/useDots'
-import { motion } from 'motion-v'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { useDots } from '../composables/useDots'
-import { useRandomImage } from '../composables/useRandomImage'
 
-const props = defineProps<{ digit: DotSymbols }>()
+const props = defineProps<{ symbol: DotSymbols | undefined }>()
 
-const { dominantColor } = useRandomImage()
 const { getGridSize, getPattern } = useDots()
 
-const scale = ref(1)
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const gridSize = getGridSize()
 const totalDots = gridSize * gridSize
 const canvasSize = ref(104)
-const dotGap = computed(() => -1)
+const dotGap = computed(() => 3)
 const dotSize = computed(() => (canvasSize.value - dotGap.value * (gridSize + 1)) / gridSize)
 
 const drawStep = ref(totalDots)
@@ -41,13 +31,10 @@ function drawCanvas(step = totalDots) {
   canvas.height = canvasSize.value
   const ctx = canvas.getContext('2d')
   if (!ctx) return
-
+  if (props.symbol === undefined || props.symbol === null) return // Explicitly check for undefined or null
   ctx.clearRect(0, 0, canvasSize.value, canvasSize.value)
-  const pattern = getPattern(props.digit)
+  const pattern = getPattern(props.symbol)
   if (!pattern) return
-
-  const dotColor = dominantColor.value
-  if (!dotColor) return
 
   let dotCount = 0
   for (let row = 0; row < gridSize; row++) {
@@ -56,17 +43,22 @@ function drawCanvas(step = totalDots) {
       const y = dotGap.value + row * (dotSize.value + dotGap.value)
       const isActive = pattern[row]?.[col] === 1 && dotCount < step
       ctx.beginPath()
-      ctx.fillStyle = isActive ? dotColor : 'transparent'
-      ctx.shadowColor = isActive ? '#0002' : 'transparent'
-      ctx.shadowBlur = isActive ? 2 : 0
-      ctx.globalAlpha = isActive ? 1 : 0.7
-      if (isActive) ctx.fillRect(x, y, dotSize.value, dotSize.value)
+      ctx.fillStyle = isActive ? 'white' : 'transparent'
+      if (isActive) {
+        ctx.arc(
+          x + dotSize.value / 2,
+          y + dotSize.value / 2,
+          dotSize.value / 2,
+          0,
+          Math.PI * 2,
+        )
+      }
+      if (isActive) ctx.fill()
       ctx.closePath()
       dotCount += pattern[row]?.[col] === 1 ? 1 : 0
     }
   }
 }
-
 function animateDrawStep() {
   if (drawStep.value < totalDots) {
     drawStep.value += 2
@@ -89,13 +81,18 @@ function startDrawing() {
     initialDraw.value = false
     return
   }
-  scale.value = 1.05
-  setTimeout(() => scale.value = 1, 500)
   animateDrawStep()
 }
 
-watch([() => props.digit, () => dominantColor.value], (newVal, oldVal) => {
-  if (newVal[0] !== null && newVal[1] !== null && newVal !== oldVal) startDrawing()
+// Ensure the initial draw happens when the component is mounted
+onMounted(() => {
+  if (props.symbol !== undefined && props.symbol !== null) {
+    startDrawing()
+  }
+})
+
+watch(() => props.symbol, (newVal, oldVal) => {
+  if (newVal !== undefined && newVal !== oldVal) startDrawing()
 }, { immediate: true })
 </script>
 
