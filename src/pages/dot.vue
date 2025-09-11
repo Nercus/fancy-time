@@ -59,9 +59,9 @@ definePage({
 })
 useSeoMeta({
   title: 'Dots Clock',
-  description: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
+  description: 'A dots style clock and date display built with Vue 3 and Tailwind CSS.',
   ogTitle: 'Dots Clock',
-  ogDescription: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
+  ogDescription: 'A dots style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
   ogUrl: window.location.href,
   ogSiteName: 'Nerc\'s clock',
