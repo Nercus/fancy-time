@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center bg-gradient-to-br from-stone-200 to-stone-300 size-full">
+  <div class="relative flex justify-center items-center bg-gradient-to-br from-stone-200 to-stone-300 size-full">
     <Time class="size-full noise-bg">
       <template #day>
         <NoiseSymbol :symbol="time.day.value?.[0]" />

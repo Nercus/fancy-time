@@ -1,5 +1,5 @@
 <template>
-  <div class="bottom-0 fixed inset-x-0 flex flex-row justify-between items-center p-10 w-full">
+  <div class="bottom-0 absolute inset-x-0 flex flex-row justify-between items-center p-10 w-full">
     <button class="cursor-pointer" @click="goBack">
       <slot name="back" />
     </button>

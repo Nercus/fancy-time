@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center bg-black size-full">
+  <div class="relative flex justify-center items-center bg-black size-full">
     <Time>
       <template #day>
         <DotSymbol :symbol="time.day.value?.[0]" />
