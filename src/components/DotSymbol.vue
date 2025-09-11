@@ -1,7 +1,7 @@
 <template>
   <canvas
     ref="canvasRef"
-    class="size-20 aspect-square" @mouseenter="handleHoverStart" />
+    class="size-8 md:size-10 lg:size-18 aspect-square" @mouseenter="handleHoverStart" />
 </template>
 
 <script setup lang="ts">
@@ -19,7 +19,7 @@ const { getGridSize, getPattern } = useDots()
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 const gridSize = getGridSize()
 const totalDots = gridSize * gridSize
-const canvasSize = ref(104)
+const canvasSize = ref(80)
 const dotGap = computed(() => 3)
 const dotSize = computed(() => (canvasSize.value - dotGap.value * (gridSize + 1)) / gridSize)
 

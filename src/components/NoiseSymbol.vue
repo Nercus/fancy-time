@@ -2,7 +2,7 @@
 <template>
   <motion.div
     class="flex flex-col content-start will-change-transform" :animate="{ y }" :transition="{ type: 'spring', duration: 0.75, bounce: 0.5 }">
-    <span v-for="el in range" :key="el" :class="[el === props.symbol ? 'opacity-100' : 'opacity-30']" class="flex justify-center items-center rounded font-semibold text-rose-800 text-5xl tracking-widest transition-opacity duration-250 select-none">
+    <span v-for="el in range" :key="el" :class="[el === props.symbol ? 'opacity-100' : 'opacity-10 sm:opacity-30']" class="flex justify-center items-center rounded font-semibold text-rose-800 text-5xl tracking-widest transition-opacity duration-250 select-none">
       {{ Number(el) ? Number(el) : el }}
     </span>
   </motion.div>
