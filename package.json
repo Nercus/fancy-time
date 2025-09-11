@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vite-ssg build",
     "preview": "vite preview",
     "lint": "eslint src --cache",
     "lint:fix": "eslint src --fix --cache"
@@ -28,6 +28,7 @@
     "@iconify/tailwind4": "^1.0.6",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vue/tsconfig": "^0.7.0",
+    "beasties": "^0.3.5",
     "eslint": "^9.33.0",
     "eslint-plugin-format": "^1.0.1",
     "typescript": "~5.8.3",
@@ -35,6 +36,7 @@
     "unplugin-vue-components": "^29.0.0",
     "unplugin-vue-router": "^0.15.0",
     "vite": "^7.1.2",
+    "vite-ssg": "^28.1.0",
     "vue-tsc": "^3.0.5"
   }
 }
