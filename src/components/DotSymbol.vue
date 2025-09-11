@@ -62,9 +62,11 @@ function drawCanvas(step = totalDots) {
   }
 }
 
+const animatedSpeed = computed(() => props.hoverAnimation ? 0.25 : 1)
+
 function animateDrawStep() {
   if (drawStep.value < totalDots) {
-    drawStep.value += 0.5
+    drawStep.value += animatedSpeed.value
     drawCanvas(drawStep.value)
     animationFrame = requestAnimationFrame(animateDrawStep)
   }
