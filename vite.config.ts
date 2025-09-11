@@ -5,6 +5,7 @@ import Components from 'unplugin-vue-components/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import { defineConfig } from 'vite'
+import svgLoader from 'vite-svg-loader'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -30,5 +31,6 @@ export default defineConfig({
       ],
       dirs: ['./src/composables'],
     }),
+    svgLoader(),
   ],
 })

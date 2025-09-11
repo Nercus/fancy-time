@@ -1,4 +1,4 @@
-export type DotSymbols = number | 'colon' | 'dot' | 'dash' | 'arrowLeft' | 'arrowRight'
+export type SymbolTypes = number | 'colon' | 'dot' | 'dash' | 'arrowLeft' | 'arrowRight'
 
 const digitPatterns: { [key: string | number]: number[][] } = {
   0: [
@@ -229,7 +229,7 @@ const digitPatterns: { [key: string | number]: number[][] } = {
 } as const
 
 export function useDots() {
-  function getPattern(dotSymbol: DotSymbols): number[][] {
+  function getPattern(dotSymbol: SymbolTypes): number[][] {
     if (!(dotSymbol in digitPatterns)) {
       throw new Error(`Invalid dot symbol: ${dotSymbol}`)
     }

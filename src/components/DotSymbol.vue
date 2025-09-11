@@ -5,11 +5,11 @@
 </template>
 
 <script setup lang="ts">
-import type { DotSymbols } from '../composables/useDots'
+import type { SymbolTypes } from '../composables/useDots'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useDots } from '../composables/useDots'
 
-const props = defineProps<{ symbol: DotSymbols | undefined }>()
+const props = defineProps<{ symbol: SymbolTypes | undefined }>()
 
 const { getGridSize, getPattern } = useDots()
 

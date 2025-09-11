@@ -1,11 +1,52 @@
 <template>
   <div
-    class="flex flex-col flex-1 justify-center items-center gap-4 bg-gradient-to-r from-neutral-300 to-stone-400 w-full h-full min-h-dvh">
-    <img src="../assets/vue.svg" alt="Vue logo" class="w-24 h-24">
-    <h1 class="text-neutral-800 text-3xl tracking-wide">
-      svg path animation
-    </h1>
-    <Navigation />
+    class="relative flex justify-center items-center bg-white size-full">
+    <Time>
+      <template #day>
+        <DrawnSymbol :symbol="time.day.value?.[0]" />
+        <DrawnSymbol :symbol="time.day.value?.[1]" />
+      </template>
+      <template #date-separator>
+        <DrawnSymbol symbol="dot" />
+      </template>
+      <template #date-time-separator>
+        <DrawnSymbol symbol="dash" />
+      </template>
+      <template #month>
+        <DrawnSymbol :symbol="time.month.value?.[0]" />
+        <DrawnSymbol :symbol="time.month.value?.[1]" />
+      </template>
+      <template #year>
+        <DrawnSymbol :symbol="time.year.value?.[0]" />
+        <DrawnSymbol :symbol="time.year.value?.[1]" />
+        <DrawnSymbol :symbol="time.year.value?.[2]" />
+        <DrawnSymbol :symbol="time.year.value?.[3]" />
+      </template>
+      <template #hour>
+        <DrawnSymbol :symbol="time.hour.value?.[0]" />
+        <DrawnSymbol :symbol="time.hour.value?.[1]" />
+      </template>
+      <template #time-separator>
+        <DrawnSymbol symbol="colon" />
+      </template>
+      <template #minute>
+        <DrawnSymbol :symbol="time.minute.value?.[0]" />
+        <DrawnSymbol :symbol="time.minute.value?.[1]" />
+      </template>
+      <template #second>
+        <DrawnSymbol :symbol="time.second.value?.[0]" />
+        <DrawnSymbol :symbol="time.second.value?.[1]" />
+      </template>
+    </Time>
+
+    <Navigation>
+      <template #back>
+        <DrawnSymbol symbol="arrowLeft" />
+      </template>
+      <template #next>
+        <DrawnSymbol symbol="arrowRight" />
+      </template>
+    </Navigation>
   </div>
 </template>
 
@@ -15,4 +56,6 @@ definePage({
     order: 0,
   },
 })
+
+const time = useTime()
 </script>

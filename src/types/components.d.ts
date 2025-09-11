@@ -9,6 +9,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     DotSymbol: typeof import('./../components/DotSymbol.vue')['default']
+    DrawnSymbol: typeof import('./../components/DrawnSymbol.vue')['default']
     Icon: typeof import('./../components/Icon.vue')['default']
     Navigation: typeof import('./../components/Navigation.vue')['default']
     NoiseSymbol: typeof import('./../components/NoiseSymbol.vue')['default']
