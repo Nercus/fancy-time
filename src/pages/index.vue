@@ -41,10 +41,10 @@
 
     <Navigation>
       <template #back>
-        <DrawnSymbol symbol="arrowLeft" />
+        <DrawnSymbol symbol="arrowLeft" hover-animation />
       </template>
       <template #next>
-        <DrawnSymbol symbol="arrowRight" />
+        <DrawnSymbol symbol="arrowRight" hover-animation />
       </template>
     </Navigation>
   </div>

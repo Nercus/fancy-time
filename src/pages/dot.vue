@@ -40,10 +40,10 @@
 
     <Navigation>
       <template #back>
-        <DotSymbol symbol="arrowLeft" />
+        <DotSymbol symbol="arrowLeft" hover-animation />
       </template>
       <template #next>
-        <DotSymbol symbol="arrowRight" />
+        <DotSymbol symbol="arrowRight" hover-animation />
       </template>
     </Navigation>
   </div>

@@ -1,7 +1,12 @@
 <template>
-  <div class="relative size-10" :class="{ 'size-4': typeof props.symbol === 'string' }">
-    <component :is="previousSvgComponent" v-if="previousSvgComponent" alt="Symbol" class="absolute inset-0 size-10 symbol fade-out" />
-    <component :is="svgComponent" alt="Symbol" class="absolute inset-0 size-10 symbol drawn-symbol" :class="{ 'size-4': typeof props.symbol === 'string' }" />
+  <div class="relative size-10">
+    <component
+      :is="previousSvgComponent" v-if="previousSvgComponent" alt="Symbol"
+      class="absolute inset-0 size-10 symbol fade-out" />
+    <component
+      :is="svgComponent" alt="Symbol" class="absolute inset-0 size-10 symbol drawn-symbol" :class="{
+        'hover-draw': props.hoverAnimation,
+      }" />
   </div>
 </template>
 
@@ -25,6 +30,7 @@ import dot from '../assets/svgs/dot.svg'
 
 const props = defineProps<{
   symbol: string | number | undefined
+  hoverAnimation?: boolean
 }>()
 
 const svgMap: Record<SymbolTypes, string> = {
@@ -76,6 +82,10 @@ watch(svgComponent, (_, oldVal) => {
   stroke-dasharray: 1500;
   stroke-dashoffset: 1500;
   animation: draw 1s ease-in-out forwards;
+}
+
+.hover-draw:hover path {
+  animation: draw 1s ease-in-out infinite alternate;
 }
 
 .fade-enter-active,

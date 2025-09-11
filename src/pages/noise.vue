@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
   <div class="relative flex justify-center items-center bg-gradient-to-br from-stone-200 to-stone-300 size-full">
     <Time class="size-full noise-bg">
@@ -40,24 +41,29 @@
 
     <Navigation>
       <template #back>
-        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" class="opacity-30 hover:opacity-100 size-8 text-rose-800">
-          <path
-            fill="currentColor"
-            d="m1.38 7.18l4.83-4.15c.7-.6 1.79-.1 1.79.82v8.29c0 .93-1.09 1.42-1.79.82L1.38 8.82c-.5-.43-.5-1.21 0-1.64" />
-        </svg>
+        <motion.div :hover="{ y: -3 }" :intial="{ y: 0 }" :transition="{ type: 'spring', duration: 0.75, bounce: 0.5 }">
+          <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" class="opacity-30 hover:opacity-100 size-8 text-rose-800">
+            <path
+              fill="currentColor"
+              d="m1.38 7.18l4.83-4.15c.7-.6 1.79-.1 1.79.82v8.29c0 .93-1.09 1.42-1.79.82L1.38 8.82c-.5-.43-.5-1.21 0-1.64" />
+          </svg>
+        </motion.div>
       </template>
       <template #next>
-        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" class="opacity-30 hover:opacity-100 size-8 text-rose-800">
-          <path
-            fill="currentColor"
-            d="M7.62 7.18L2.79 3.03c-.7-.6-1.79-.1-1.79.82v8.29c0 .93 1.09 1.42 1.79.82l4.83-4.14c.5-.43.5-1.21 0-1.64" />
-        </svg>
+        <motion.div :hover="{ y: -3 }" :intial="{ y: 0 }" :transition="{ type: 'spring', duration: 0.75, bounce: 0.5 }">
+          <svg xmlns="http://www.w3.org/2000/svg" width="9" height="16" viewBox="0 0 9 16" class="opacity-30 hover:opacity-100 size-8 text-rose-800">
+            <path
+              fill="currentColor"
+              d="M7.62 7.18L2.79 3.03c-.7-.6-1.79-.1-1.79.82v8.29c0 .93 1.09 1.42 1.79.82l4.83-4.14c.5-.43.5-1.21 0-1.64" />
+          </svg>
+        </motion.div>
       </template>
     </Navigation>
   </div>
 </template>
 
 <script setup lang="ts">
+import { motion } from 'motion-v'
 import ogImage from '../assets/noise.png'
 
 definePage({

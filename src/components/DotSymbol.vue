@@ -1,7 +1,7 @@
 <template>
   <canvas
     ref="canvasRef"
-    class="size-20 aspect-square" />
+    class="size-20 aspect-square" @mouseenter="handleHoverStart" />
 </template>
 
 <script setup lang="ts">
@@ -9,7 +9,10 @@ import type { SymbolTypes } from '../composables/useDots'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useDots } from '../composables/useDots'
 
-const props = defineProps<{ symbol: SymbolTypes | undefined }>()
+const props = defineProps<{
+  symbol: SymbolTypes | undefined
+  hoverAnimation?: boolean
+}>()
 
 const { getGridSize, getPattern } = useDots()
 
@@ -58,9 +61,10 @@ function drawCanvas(step = totalDots) {
     }
   }
 }
+
 function animateDrawStep() {
   if (drawStep.value < totalDots) {
-    drawStep.value += 2
+    drawStep.value += 0.5
     drawCanvas(drawStep.value)
     animationFrame = requestAnimationFrame(animateDrawStep)
   }
@@ -81,6 +85,12 @@ function startDrawing() {
     return
   }
   animateDrawStep()
+}
+
+function handleHoverStart() {
+  if (props.hoverAnimation) {
+    startDrawing()
+  }
 }
 
 // Ensure the initial draw happens when the component is mounted
