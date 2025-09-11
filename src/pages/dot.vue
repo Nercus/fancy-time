@@ -50,18 +50,19 @@
 </template>
 
 <script setup lang="ts">
+import ogImage from '../assets/dots.png'
+
 definePage({
   meta: {
     order: 1,
   },
 })
-
 useSeoMeta({
   title: 'Dots Clock',
   description: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
   ogTitle: 'Dots Clock',
   ogDescription: 'A dots style clock and calendar built with Vue 3 and Tailwind CSS.',
-  ogImage: '../assets/dots.png',
+  ogImage,
 })
 
 const time = useTime()

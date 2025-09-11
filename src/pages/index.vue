@@ -51,6 +51,8 @@
 </template>
 
 <script setup lang="ts">
+import ogImage from '../assets/handdrawn.png'
+
 definePage({
   meta: {
     order: 0,
@@ -62,7 +64,7 @@ useSeoMeta({
   description: 'A hand-drawn style clock and calendar built with Vue 3 and Tailwind CSS.',
   ogTitle: 'Hand-Drawn Clock',
   ogDescription: 'A hand-drawn style clock and calendar built with Vue 3 and Tailwind CSS.',
-  ogImage: '../assets/handdrawn.png',
+  ogImage,
 })
 
 const time = useTime()

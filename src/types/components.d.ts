@@ -15,13 +15,6 @@ declare module 'vue' {
     NoiseSymbol: typeof import('./../components/NoiseSymbol.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    SegmentDays: typeof import('./../components/SegmentDays.vue')['default']
-    SegmentHours: typeof import('./../components/SegmentHours.vue')['default']
-    SegmentMinutes: typeof import('./../components/SegmentMinutes.vue')['default']
-    SegmentMonths: typeof import('./../components/SegmentMonths.vue')['default']
-    SegmentSeconds: typeof import('./../components/SegmentSeconds.vue')['default']
-    SegmentYears: typeof import('./../components/SegmentYears.vue')['default']
-    StapledSymbol: typeof import('../components/NoiseSymbol.vue')['default']
     Time: typeof import('./../components/Time.vue')['default']
   }
 }

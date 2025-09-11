@@ -58,21 +58,23 @@
 </template>
 
 <script setup lang="ts">
+import ogImage from '../assets/noise.png'
+
 definePage({
   meta: {
     order: 2,
   },
 })
 
-const time = useTime()
-
 useSeoMeta({
   title: 'Noise Clock',
   description: 'A noise style clock and calendar built with Vue 3 and Tailwind CSS.',
   ogTitle: 'Noise Clock',
   ogDescription: 'A noise style clock and calendar built with Vue 3 and Tailwind CSS.',
-  ogImage: '../assets/noise.png',
+  ogImage,
 })
+
+const time = useTime()
 </script>
 
 <style lang="css" scoped>
