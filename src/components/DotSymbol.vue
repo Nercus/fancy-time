@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
   <canvas
     ref="canvasRef"
