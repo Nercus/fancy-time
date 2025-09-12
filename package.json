@@ -16,6 +16,7 @@
     "@vueuse/core": "^13.7.0",
     "fast-average-color": "^9.5.0",
     "motion-v": "^1.7.1",
+    "polymorph-js": "^1.0.2",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.12",
     "vite-svg-loader": "^5.1.0",

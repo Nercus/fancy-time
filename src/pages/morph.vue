@@ -1,0 +1,74 @@
+<!-- eslint-disable vue/component-name-in-template-casing -->
+<template>
+  <div class="relative flex justify-center items-center bg-gradient-to-br from-stone-200 to-stone-300 size-full">
+    <Time class="size-full noise-bg">
+      <template #day>
+        <MorphSymbol :symbol="time.day.value?.[0]" />
+        <MorphSymbol :symbol="time.day.value?.[1]" />
+      </template>
+      <template #date-separator>
+        <MorphSymbol symbol="dot" />
+      </template>
+      <template #date-time-separator>
+        <MorphSymbol symbol="dash" />
+      </template>
+      <template #month>
+        <MorphSymbol :symbol="time.month.value?.[0]" />
+        <MorphSymbol :symbol="time.month.value?.[1]" />
+      </template>
+      <template #year>
+        <MorphSymbol :symbol="time.year.value?.[0]" />
+        <MorphSymbol :symbol="time.year.value?.[1]" />
+        <MorphSymbol :symbol="time.year.value?.[2]" />
+        <MorphSymbol :symbol="time.year.value?.[3]" />
+      </template>
+      <template #hour>
+        <MorphSymbol :symbol="time.hour.value?.[0]" />
+        <MorphSymbol :symbol="time.hour.value?.[1]" />
+      </template>
+      <template #time-separator>
+        <MorphSymbol symbol="colon" />
+      </template>
+      <template #minute>
+        <MorphSymbol :symbol="time.minute.value?.[0]" />
+        <MorphSymbol :symbol="time.minute.value?.[1]" />
+      </template>
+      <template #second>
+        <MorphSymbol :symbol="time.second.value?.[0]" />
+        <MorphSymbol :symbol="time.second.value?.[1]" />
+      </template>
+    </Time>
+
+    <Navigation>
+      <template #back>
+        back
+      </template>
+      <template #next>
+        next
+      </template>
+    </Navigation>
+  </div>
+</template>
+
+<script setup lang="ts">
+import ogImage from '../assets/noise.png'
+
+definePage({
+  meta: {
+    order: 3,
+  },
+})
+
+useSeoMeta({
+  title: 'Noise Clock',
+  description: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
+  ogTitle: 'Noise Clock',
+  ogDescription: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
+  ogImage,
+  ogUrl: window.location.href,
+  ogSiteName: 'Nerc\'s clock',
+  ogType: 'website',
+})
+
+const time = useTime()
+</script>

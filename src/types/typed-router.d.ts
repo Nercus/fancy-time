@@ -20,6 +20,7 @@ declare module 'vue-router/auto-routes' {
   export interface RouteNamedMap {
     '/': RouteRecordInfo<'/', '/', Record<never, never>, Record<never, never>>,
     '/dot': RouteRecordInfo<'/dot', '/dot', Record<never, never>, Record<never, never>>,
+    '/morph': RouteRecordInfo<'/morph', '/morph', Record<never, never>, Record<never, never>>,
     '/noise': RouteRecordInfo<'/noise', '/noise', Record<never, never>, Record<never, never>>,
   }
 
@@ -40,6 +41,10 @@ declare module 'vue-router/auto-routes' {
     }
     'src/pages/dot.vue': {
       routes: '/dot'
+      views: never
+    }
+    'src/pages/morph.vue': {
+      routes: '/morph'
       views: never
     }
     'src/pages/noise.vue': {

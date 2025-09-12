@@ -23,6 +23,9 @@ importers:
       motion-v:
         specifier: ^1.7.1
         version: 1.7.1(@vueuse/core@13.9.0(vue@3.5.21(typescript@5.8.3)))(vue@3.5.21(typescript@5.8.3))
+      polymorph-js:
+        specifier: ^1.0.2
+        version: 1.0.2
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -2080,6 +2083,9 @@ packages:
 
   pnpm-workspace-yaml@1.1.1:
     resolution: {integrity: sha512-nGBB7h3Ped3g9dBrR6d3YNwXCKYsEg8K9J3GMmSrwGEXq3RHeGW44/B4MZW51p4FRMnyxJzTY5feSBbUjRhIHQ==}
+
+  polymorph-js@1.0.2:
+    resolution: {integrity: sha512-moIVGNoyYwhzzl6DWssvJyUxE4y6Coe06JGaQ0tUd+DBzZLC5SD4Vc4fH3Etk9bJ2633AozHF2x00/IqH/iXYg==}
 
   postcss-media-query-parser@0.2.3:
     resolution: {integrity: sha512-3sOlxmbKcSHMjlUXQZKQ06jOswE7oVkXPxmZdoB1r5l0q6gTFTQSHxNxOrCccElbW7dxNytifNEo8qidX2Vsig==}
@@ -4717,6 +4723,8 @@ snapshots:
   pnpm-workspace-yaml@1.1.1:
     dependencies:
       yaml: 2.8.1
+
+  polymorph-js@1.0.2: {}
 
   postcss-media-query-parser@0.2.3: {}
 
