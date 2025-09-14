@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-import ogImage from '../assets/noise.png'
+import ogImage from '../assets/morph.png'
 
 definePage({
   meta: {
@@ -60,10 +60,10 @@ definePage({
 })
 
 useSeoMeta({
-  title: 'Noise Clock',
-  description: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
-  ogTitle: 'Noise Clock',
-  ogDescription: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
+  title: 'Morph Clock',
+  description: 'A morph style clock and date display built with Vue 3 and Tailwind CSS.',
+  ogTitle: 'Morph Clock',
+  ogDescription: 'A morph style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
   ogUrl: window.location.href,
   ogSiteName: 'Nerc\'s clock',
