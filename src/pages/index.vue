@@ -65,7 +65,7 @@ useSeoMeta({
   ogTitle: 'Hand-Drawn Clock',
   ogDescription: 'A hand-drawn style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
-  ogUrl: window.location.href,
+  ogUrl: 'https://time.wintersperger.dev',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
 })

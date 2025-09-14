@@ -65,7 +65,7 @@ useSeoMeta({
   ogTitle: 'Morph Clock',
   ogDescription: 'A morph style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
-  ogUrl: window.location.href,
+  ogUrl: 'https://time.wintersperger.dev/morph',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
 })

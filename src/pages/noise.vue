@@ -78,7 +78,7 @@ useSeoMeta({
   ogTitle: 'Noise Clock',
   ogDescription: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
-  ogUrl: window.location.href,
+  ogUrl: 'https://time.wintersperger.dev/noise',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
 })

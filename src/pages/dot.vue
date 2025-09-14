@@ -63,7 +63,7 @@ useSeoMeta({
   ogTitle: 'Dots Clock',
   ogDescription: 'A dots style clock and date display built with Vue 3 and Tailwind CSS.',
   ogImage,
-  ogUrl: window.location.href,
+  ogUrl: 'https://time.wintersperger.dev/dot',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
 })
