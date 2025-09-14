@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
-  <div class="relative flex justify-center items-center bg-gradient-to-br from-stone-200 to-stone-300 size-full">
+  <div class="relative flex justify-center items-center bg-radial from-40% from-slate-200 to-slate-300 size-full">
     <Time class="size-full noise-bg">
       <template #day>
         <MorphSymbol :symbol="time.day.value?.[0]" />
@@ -41,10 +41,10 @@
 
     <Navigation>
       <template #back>
-        back
+        <MorphSymbol symbol="arrowLeft" hover-animation />
       </template>
       <template #next>
-        next
+        <MorphSymbol symbol="arrowRight" hover-animation />
       </template>
     </Navigation>
   </div>

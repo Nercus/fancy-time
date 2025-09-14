@@ -1,95 +1,124 @@
 <!-- eslint-disable vue/html-self-closing -->
 <template>
-  <div class="size-20">
-    <svg class="fill-blue-900" v-html="svgPath"></svg>
+  <div class="size-16" @mouseenter="props.hoverAnimation ? resetFilter() : null">
+    <div class="relative w-fit font-mono svg-filter">
+      <span ref="text1" class="inline-block absolute w-full font-extrabold text-amber-700 text-6xl text-center select-none" :class="currentColor">{{ previousSymbol }}</span>
+      <span ref="text2" class="inline-block absolute w-full font-extrabold text-amber-700 text-6xl text-center select-none" :class="currentColor">{{ currentSymbol }}</span>
+    </div>
+
+    <svg id="filters">
+      <defs>
+        <filter id="threshold">
+          <feColorMatrix
+            in="SourceGraphic" type="matrix" values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 255 -50" />
+        </filter>
+      </defs>
+    </svg>
   </div>
 </template>
 
 <script setup lang="ts">
-import { interpolate } from 'polymorph-js'
-
-import Zero from '../assets/svgs/0.svg?raw'
-import One from '../assets/svgs/1.svg?raw'
-import Two from '../assets/svgs/2.svg?raw'
-import Three from '../assets/svgs/3.svg?raw'
-import Four from '../assets/svgs/4.svg?raw'
-import Five from '../assets/svgs/5.svg?raw'
-import Six from '../assets/svgs/6.svg?raw'
-import Seven from '../assets/svgs/7.svg?raw'
-import Eight from '../assets/svgs/8.svg?raw'
-import Nine from '../assets/svgs/9.svg?raw'
-import arrowLeft from '../assets/svgs/arrowLeft.svg?raw'
-import arrowRight from '../assets/svgs/arrowRight.svg?raw'
-import colon from '../assets/svgs/colon.svg?raw'
-import dash from '../assets/svgs/dash.svg?raw'
-import dot from '../assets/svgs/dot.svg?raw'
-
 const props = defineProps<{
   symbol: string | number | undefined
   hoverAnimation?: boolean
 }>()
 
-const svgMap: Record<SymbolTypes, string> = {
-  0: Zero,
-  1: One,
-  2: Two,
-  3: Three,
-  4: Four,
-  5: Five,
-  6: Six,
-  7: Seven,
-  8: Eight,
-  9: Nine,
-  arrowLeft,
-  arrowRight,
-  colon,
-  dash,
-  dot,
-}
+const symbols = {
+  0: { symbol: '0', color: 'text-red-600' },
+  1: { symbol: '1', color: 'text-amber-600' },
+  2: { symbol: '2', color: 'text-yellow-600' },
+  3: { symbol: '3', color: 'text-green-600' },
+  4: { symbol: '4', color: 'text-teal-600' },
+  5: { symbol: '5', color: 'text-sky-600' },
+  6: { symbol: '6', color: 'text-indigo-600' },
+  7: { symbol: '7', color: 'text-violet-600' },
+  8: { symbol: '8', color: 'text-fuchsia-600' },
+  9: { symbol: '9', color: 'text-pink-600' },
+  dot: { symbol: '.', color: 'text-slate-600' },
+  dash: { symbol: '-', color: 'text-slate-600' },
+  colon: { symbol: ':', color: 'text-slate-600' },
+  arrowLeft: { symbol: '<', color: 'text-sky-800' },
+  arrowRight: { symbol: '>', color: 'text-sky-800' },
+} as const
 
-const newPath = computed(() => {
-  return svgMap[props.symbol as SymbolTypes] || null
+const currentSymbol = computed(() => {
+  return symbols[props.symbol as keyof typeof symbols]?.symbol || null
 })
 
-function getPathFromSvg(svg: string) {
-  const pathMatch = svg.match(/<path[^>]*d="([^"]*)"/)
-  return pathMatch ? pathMatch[1] : null
-}
+const currentColor = computed(() => {
+  return symbols[props.symbol as keyof typeof symbols]?.color || 'text-slate-600'
+})
 
-const svgPath = ref<string | null>(getPathFromSvg(newPath.value || ''))
+const morphTime = 0.75
+let morph = 0
 
-watch(newPath, (newValue, oldValue) => {
-  if (newValue && oldValue) {
-    const oldPath = getPathFromSvg(oldValue)
-    const newPath = getPathFromSvg(newValue)
-
-    if (oldPath && newPath) {
-      const morph = interpolate([oldPath, newPath])
-      let progress = 0
-      const duration = 500 // Animation duration in milliseconds
-      const startTime = performance.now()
-
-      const animate = (currentTime: number) => {
-        const elapsed = currentTime - startTime
-        progress = Math.max(0, Math.min(elapsed / duration, 1)) // Clamp progress to [0, 1]
-
-        svgPath.value = `<path d="${morph(progress)}" />`
-
-        if (progress < 1) {
-          requestAnimationFrame(animate)
-        }
-      }
-
-      requestAnimationFrame(animate)
-    }
+const previousSymbol = shallowRef<string | null>(null)
+watch(currentSymbol, (newVal, oldVal) => {
+  if (newVal !== oldVal) {
+    morph = 0
+  }
+  if (oldVal === null) {
+    previousSymbol.value = currentSymbol.value
     return
   }
+  previousSymbol.value = oldVal
+})
 
-  if (newValue) {
-    svgPath.value = `<path d="${getPathFromSvg(newValue)}" />`
+const text1 = useTemplateRef('text1')
+const text2 = useTemplateRef('text2')
+
+function doMorph() {
+  morph += 0.01
+  let fraction = morph / morphTime
+
+  if (fraction > 1) {
+    fraction = 1
+  }
+
+  setMorph(fraction)
+}
+
+function setMorph(fraction: number) {
+  // inspired by https://codepen.io/Valgo/pen/PowZaNY
+  if (!text1.value || !text2.value) return
+  text2.value.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+  text2.value.style.opacity = `${fraction ** 0.4 * 100}%`
+
+  fraction = 1 - fraction
+  text1.value.style.filter = `blur(${Math.min(8 / fraction - 8, 100)}px)`
+  text1.value.style.opacity = `${fraction ** 0.4 * 100}%`
+}
+
+function resetFilter() {
+  morph = 0
+  if (!text1.value || !text2.value) return
+  text2.value.style.filter = ''
+  text2.value.style.opacity = '100%'
+
+  text1.value.style.filter = ''
+  text1.value.style.opacity = '0%'
+}
+
+function animate() {
+  requestAnimationFrame(animate)
+  if (currentSymbol.value !== previousSymbol.value) {
+    doMorph()
   }
   else {
-    svgPath.value = null
+    resetFilter()
   }
-}, { immediate: true })
+}
+
+onMounted(() => {
+  animate()
+})
 </script>
+
+<style scoped>
+.svg-filter {
+  filter: url(#threshold) blur(0.6px);
+}
+</style>
