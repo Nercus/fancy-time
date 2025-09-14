@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/html-self-closing -->
 <template>
-  <div class="size-16" @mouseenter="props.hoverAnimation ? resetFilter() : null">
-    <div class="relative w-fit font-mono svg-filter">
+  <div class="size-16" :class="{ 'overflow-hidden': Number.isNaN(Number(props.symbol)) }" @mouseenter="props.hoverAnimation ? resetFilter() : null">
+    <div class="relative w-fit font-mono text-center svg-filter">
       <span ref="text1" class="inline-block absolute w-full font-extrabold text-amber-700 text-6xl text-center select-none" :class="currentColor">{{ previousSymbol }}</span>
       <span ref="text2" class="inline-block absolute w-full font-extrabold text-amber-700 text-6xl text-center select-none" :class="currentColor">{{ currentSymbol }}</span>
     </div>
