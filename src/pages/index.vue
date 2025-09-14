@@ -68,6 +68,10 @@ useSeoMeta({
   ogUrl: 'https://time.wintersperger.dev',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
+  twitterTitle: 'Hand-Drawn Clock',
+  twitterDescription: 'A hand-drawn style clock and date display built with Vue 3 and Tailwind CSS.',
+  twitterImage: ogImage,
+  twitterCard: 'summary_large_image',
 })
 
 const time = useTime()
