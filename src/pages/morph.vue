@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
   <div class="relative flex justify-center items-center bg-radial from-40% from-slate-200 to-slate-300 size-full">
-    <Time class="size-full noise-bg">
+    <Time class="size-full">
       <template #day>
         <MorphSymbol :symbol="time.day.value?.[0]" />
         <MorphSymbol :symbol="time.day.value?.[1]" />
