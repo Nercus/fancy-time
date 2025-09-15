@@ -85,6 +85,7 @@ useSeoMeta({
   twitterDescription: 'A noise style clock and date display built with Vue 3 and Tailwind CSS.',
   twitterImage: ogImage,
   twitterCard: 'summary_large_image',
+  themeColor: '#e7e5e4',
 })
 
 const time = useTime()

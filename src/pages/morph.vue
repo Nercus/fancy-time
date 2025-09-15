@@ -72,6 +72,7 @@ useSeoMeta({
   twitterDescription: 'A morph style clock and date display built with Vue 3 and Tailwind CSS.',
   twitterImage: ogImage,
   twitterCard: 'summary_large_image',
+  themeColor: '#e2e8f0',
 })
 
 const time = useTime()

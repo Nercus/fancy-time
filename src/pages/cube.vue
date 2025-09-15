@@ -71,6 +71,7 @@ useSeoMeta({
   twitterDescription: 'A cube style clock and date display built with Vue 3 and Tailwind CSS.',
   twitterImage: ogImage,
   twitterCard: 'summary_large_image',
+  themeColor: '#3f3f46',
 })
 
 const time = useTime()

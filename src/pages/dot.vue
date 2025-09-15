@@ -70,6 +70,7 @@ useSeoMeta({
   twitterDescription: 'A dots style clock and date display built with Vue 3 and Tailwind CSS.',
   twitterImage: ogImage,
   twitterCard: 'summary_large_image',
+  themeColor: '#000000',
 })
 
 const time = useTime()
