@@ -8,6 +8,7 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    CubeSymbol: typeof import('./../components/CubeSymbol.vue')['default']
     DotSymbol: typeof import('./../components/DotSymbol.vue')['default']
     DrawnSymbol: typeof import('./../components/DrawnSymbol.vue')['default']
     Icon: typeof import('./../components/Icon.vue')['default']
