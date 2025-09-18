@@ -54,7 +54,7 @@ import ogImage from '../assets/cube.png'
 
 definePage({
   meta: {
-    order: 4,
+    order: 3,
   },
 })
 
