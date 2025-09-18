@@ -2,32 +2,32 @@
   <div class="size-20 perspective-normal" @mouseenter="animationOnHover" @mouseleave="animationOnHover">
     <div class="relative size-20 transform-3d transition-all duration-500 ease-in-out" :style="cubeTransform">
       <div
-        class="absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl front"
+        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl front"
         :class="getFaceColor('front')">
         {{ getFaceSymbol('front') }}
       </div>
       <div
-        class="absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl back"
+        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl back"
         :class="getFaceColor('back')">
         {{ getFaceSymbol('back') }}
       </div>
       <div
-        class="right absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl"
+        class="right absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
         :class="getFaceColor('right')">
         {{ getFaceSymbol('right') }}
       </div>
       <div
-        class="left absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl"
+        class="left absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
         :class="getFaceColor('left')">
         {{ getFaceSymbol('left') }}
       </div>
       <div
-        class="top absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl"
+        class="top absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
         :class="getFaceColor('top')">
         {{ getFaceSymbol('top') }}
       </div>
       <div
-        class="bottom absolute flex justify-center items-center bg-zinc-950 size-full font-bold text-4xl"
+        class="bottom absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
         :class="getFaceColor('bottom')">
         {{ getFaceSymbol('bottom') }}
       </div>
@@ -44,21 +44,21 @@ const props = defineProps<{
 }>()
 
 const symbols = {
-  0: { symbol: '0', color: 'text-red-400 border border-red-400 shadow-red-400 shadow' },
-  1: { symbol: '1', color: 'text-amber-400 border border-amber-400 shadow-amber-400 shadow' },
-  2: { symbol: '2', color: 'text-yellow-400 border border-yellow-400 shadow-yellow-400 shadow' },
-  3: { symbol: '3', color: 'text-green-400 border border-green-400 shadow-green-400 shadow' },
-  4: { symbol: '4', color: 'text-teal-400 border border-teal-400 shadow-teal-400 shadow' },
-  5: { symbol: '5', color: 'text-sky-400 border border-sky-400 shadow-sky-400 shadow' },
-  6: { symbol: '6', color: 'text-indigo-400 border border-indigo-400 shadow-indigo-400 shadow' },
-  7: { symbol: '7', color: 'text-violet-400 border border-violet-400 shadow-violet-400 shadow' },
-  8: { symbol: '8', color: 'text-fuchsia-400 border border-fuchsia-400 shadow-fuchsia-400 shadow' },
-  9: { symbol: '9', color: 'text-pink-400 border border-pink-400 shadow-pink-400 shadow' },
-  dot: { symbol: '.', color: 'text-zinc-300 border border-zinc-300 shadow-zinc-300 shadow' },
-  dash: { symbol: '-', color: 'text-zinc-300 border border-zinc-300 shadow-zinc-300 shadow' },
-  colon: { symbol: ':', color: 'text-zinc-300 border border-zinc-300 shadow-zinc-300 shadow' },
-  arrowLeft: { symbol: '<', color: 'text-zinc-300 border border-zinc-300 shadow-zinc-300 shadow' },
-  arrowRight: { symbol: '>', color: 'text-zinc-300 border border-zinc-300 shadow-zinc-300 shadow' },
+  0: { symbol: '0', color: 'text-red-400 shadow' },
+  1: { symbol: '1', color: 'text-amber-400 shadow' },
+  2: { symbol: '2', color: 'text-yellow-400 shadow' },
+  3: { symbol: '3', color: 'text-green-400 shadow' },
+  4: { symbol: '4', color: 'text-teal-400 shadow' },
+  5: { symbol: '5', color: 'text-sky-400 shadow' },
+  6: { symbol: '6', color: 'text-indigo-400 shadow' },
+  7: { symbol: '7', color: 'text-violet-400 shadow' },
+  8: { symbol: '8', color: 'text-fuchsia-400 shadow' },
+  9: { symbol: '9', color: 'text-pink-400 shadow' },
+  dot: { symbol: '.', color: 'text-zinc-300 shadow' },
+  dash: { symbol: '-', color: 'text-zinc-300 shadow' },
+  colon: { symbol: ':', color: 'text-zinc-300 shadow' },
+  arrowLeft: { symbol: '<-', color: 'text-zinc-300 shadow' },
+  arrowRight: { symbol: '->', color: 'text-zinc-300 shadow' },
 } as const
 
 const showSide = ref<'front' | 'back' | 'left' | 'right' | 'top' | 'bottom'>('front')
