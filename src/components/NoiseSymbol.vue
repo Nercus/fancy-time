@@ -33,15 +33,3 @@ const range = computed(() => {
   return Array.from({ length: 10 }, (_, i) => i)
 })
 </script>
-
-<style lang="css" scoped>
-.text-shadow-inner {
-  background-color: var(--color-rose-900);
-  text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.5);
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  will-change: transform;
-}
-</style>
