@@ -1,6 +1,6 @@
 <template>
-  <div class="relative flex justify-center items-center bg-radial from-40% from-zinc-200 to-zinc-300 size-full">
-    <Time class="size-full noise-bg">
+  <div class="relative flex flex-1 justify-center items-center bg-radial from-40% from-zinc-200 to-zinc-300 size-full">
+    <Time class="flex-1 size-full noise-bg">
       <template #day>
         <CubeSymbol :symbol="time.day.value?.[0]" />
         <CubeSymbol :symbol="time.day.value?.[1]" />

@@ -1,7 +1,7 @@
 <template>
   <div
-    class="relative flex justify-center items-center bg-white size-full">
-    <Time>
+    class="relative flex flex-1 justify-center items-center bg-white size-full">
+    <Time class="flex-1 size-full">
       <template #day>
         <DrawnSymbol :symbol="time.day.value?.[0]" />
         <DrawnSymbol :symbol="time.day.value?.[1]" />

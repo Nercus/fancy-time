@@ -1,6 +1,6 @@
 <template>
-  <div class="relative flex justify-center items-center bg-black size-full">
-    <Time>
+  <div class="relative flex flex-1 justify-center items-center bg-black size-full">
+    <Time class="flex-1 size-full">
       <template #day>
         <DotSymbol :symbol="time.day.value?.[0]" />
         <DotSymbol :symbol="time.day.value?.[1]" />
