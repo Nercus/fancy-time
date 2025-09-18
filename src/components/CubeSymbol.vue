@@ -1,33 +1,33 @@
 <template>
-  <div class="size-20 perspective-normal" @mouseenter="animationOnHover" @mouseleave="animationOnHover">
-    <div class="relative size-20 transform-3d transition-all duration-500 ease-in-out" :style="cubeTransform">
+  <div class="size-8 md:size-10 lg:size-18 perspective-normal" @mouseenter="animationOnHover" @mouseleave="animationOnHover">
+    <div class="relative size-8 md:size-10 lg:size-18 transform-3d transition-all duration-500 ease-in-out" :style="cubeTransform">
       <div
-        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl front"
+        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl front"
         :class="getFaceColor('front')">
         {{ getFaceSymbol('front') }}
       </div>
       <div
-        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl back"
+        class="absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl back"
         :class="getFaceColor('back')">
         {{ getFaceSymbol('back') }}
       </div>
       <div
-        class="right absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
+        class="right absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl"
         :class="getFaceColor('right')">
         {{ getFaceSymbol('right') }}
       </div>
       <div
-        class="left absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
+        class="left absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl"
         :class="getFaceColor('left')">
         {{ getFaceSymbol('left') }}
       </div>
       <div
-        class="top absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
+        class="top absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl"
         :class="getFaceColor('top')">
         {{ getFaceSymbol('top') }}
       </div>
       <div
-        class="bottom absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-4xl"
+        class="bottom absolute flex justify-center items-center bg-zinc-100 border border-zinc-400 size-full font-mono font-bold text-lg md:text-2xl lg:text-4xl"
         :class="getFaceColor('bottom')">
         {{ getFaceSymbol('bottom') }}
       </div>
@@ -36,12 +36,15 @@
 </template>
 
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from '@vueuse/core'
 import { computed, ref, watch } from 'vue'
 
 const props = defineProps<{
   symbol: string | number | undefined
   hoverAnimation?: boolean
 }>()
+
+const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const symbols = {
   0: { symbol: '0', color: 'text-red-400 shadow' },
@@ -111,20 +114,27 @@ function animationOnHover() {
   }
 }
 
+const cubeZ = computed(() => {
+  if (breakpoints.lg.value) return 36
+  if (breakpoints.md.value) return 20
+  return 16
+})
+
 const cubeTransform = computed(() => {
+  const z = cubeZ.value
   switch (showSide.value) {
     case 'front':
-      return 'transform: translateZ(-40px) rotateY(0deg);'
+      return `transform: translateZ(-${z}px) rotateY(0deg);`
     case 'right':
-      return 'transform: translateZ(-40px) rotateY(-90deg);'
+      return `transform: translateZ(-${z}px) rotateY(-90deg);`
     case 'back':
-      return 'transform: translateZ(-40px) rotateY(-180deg);'
+      return `transform: translateZ(-${z}px) rotateY(-180deg);`
     case 'left':
-      return 'transform: translateZ(-40px) rotateY(90deg);'
+      return `transform: translateZ(-${z}px) rotateY(90deg);`
     case 'top':
-      return 'transform: translateZ(-40px) rotateX(-90deg);'
+      return `transform: translateZ(-${z}px) rotateX(-90deg);`
     case 'bottom':
-      return 'transform: translateZ(-40px) rotateX(90deg);'
+      return `transform: translateZ(-${z}px) rotateX(90deg);`
     default:
       return ''
   }
@@ -165,27 +175,59 @@ function getFaceColor(face: string) {
 </script>
 
 <style lang="css" scoped>
+.front,
+.right,
+.back,
+.left,
+.top,
+.bottom {
+  /* Default for sm */
+  --cube-z: 16px;
+}
+
+@media (min-width: 768px) {
+  .front,
+  .right,
+  .back,
+  .left,
+  .top,
+  .bottom {
+    --cube-z: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .front,
+  .right,
+  .back,
+  .left,
+  .top,
+  .bottom {
+    --cube-z: 36px;
+  }
+}
+
 .front {
-  transform: rotateY(0deg) translateZ(40px);
+  transform: rotateY(0deg) translateZ(var(--cube-z));
 }
 
 .right {
-  transform: rotateY(90deg) translateZ(40px);
+  transform: rotateY(90deg) translateZ(var(--cube-z));
 }
 
 .back {
-  transform: rotateY(180deg) translateZ(40px);
+  transform: rotateY(180deg) translateZ(var(--cube-z));
 }
 
 .left {
-  transform: rotateY(-90deg) translateZ(40px);
+  transform: rotateY(-90deg) translateZ(var(--cube-z));
 }
 
 .top {
-  transform: rotateX(90deg) translateZ(40px);
+  transform: rotateX(90deg) translateZ(var(--cube-z));
 }
 
 .bottom {
-  transform: rotateX(-90deg) translateZ(40px);
+  transform: rotateX(-90deg) translateZ(var(--cube-z));
 }
 </style>
