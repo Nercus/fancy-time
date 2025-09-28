@@ -1,51 +1,53 @@
 <template>
   <div class="relative flex flex-1 justify-center items-center bg-radial from-40% from-zinc-200 to-zinc-300 size-full">
-    <Time class="flex-1 size-full noise-bg">
-      <template #day>
-        <CubeSymbol :symbol="time.day.value?.[0]" />
-        <CubeSymbol :symbol="time.day.value?.[1]" />
-      </template>
-      <template #date-separator>
-        <CubeSymbol symbol="dot" />
-      </template>
-      <template #date-time-separator>
-        <CubeSymbol symbol="dash" />
-      </template>
-      <template #month>
-        <CubeSymbol :symbol="time.month.value?.[0]" />
-        <CubeSymbol :symbol="time.month.value?.[1]" />
-      </template>
-      <template #year>
-        <CubeSymbol :symbol="time.year.value?.[0]" />
-        <CubeSymbol :symbol="time.year.value?.[1]" />
-        <CubeSymbol :symbol="time.year.value?.[2]" />
-        <CubeSymbol :symbol="time.year.value?.[3]" />
-      </template>
-      <template #hour>
-        <CubeSymbol :symbol="time.hour.value?.[0]" />
-        <CubeSymbol :symbol="time.hour.value?.[1]" />
-      </template>
-      <template #time-separator>
-        <CubeSymbol symbol="colon" />
-      </template>
-      <template #minute>
-        <CubeSymbol :symbol="time.minute.value?.[0]" />
-        <CubeSymbol :symbol="time.minute.value?.[1]" />
-      </template>
-      <template #second>
-        <CubeSymbol :symbol="time.second.value?.[0]" />
-        <CubeSymbol :symbol="time.second.value?.[1]" />
-      </template>
-    </Time>
+    <div class="flex-1 size-full">
+      <Time class="fixed inset-0 size-screen">
+        <template #day>
+          <CubeSymbol :symbol="time.day.value?.[0]" />
+          <CubeSymbol :symbol="time.day.value?.[1]" />
+        </template>
+        <template #date-separator>
+          <CubeSymbol symbol="dot" />
+        </template>
+        <template #date-time-separator>
+          <CubeSymbol symbol="dash" />
+        </template>
+        <template #month>
+          <CubeSymbol :symbol="time.month.value?.[0]" />
+          <CubeSymbol :symbol="time.month.value?.[1]" />
+        </template>
+        <template #year>
+          <CubeSymbol :symbol="time.year.value?.[0]" />
+          <CubeSymbol :symbol="time.year.value?.[1]" />
+          <CubeSymbol :symbol="time.year.value?.[2]" />
+          <CubeSymbol :symbol="time.year.value?.[3]" />
+        </template>
+        <template #hour>
+          <CubeSymbol :symbol="time.hour.value?.[0]" />
+          <CubeSymbol :symbol="time.hour.value?.[1]" />
+        </template>
+        <template #time-separator>
+          <CubeSymbol symbol="colon" />
+        </template>
+        <template #minute>
+          <CubeSymbol :symbol="time.minute.value?.[0]" />
+          <CubeSymbol :symbol="time.minute.value?.[1]" />
+        </template>
+        <template #second>
+          <CubeSymbol :symbol="time.second.value?.[0]" />
+          <CubeSymbol :symbol="time.second.value?.[1]" />
+        </template>
+      </Time>
 
-    <Navigation>
-      <template #back>
-        <CubeSymbol symbol="arrowLeft" hover-animation />
-      </template>
-      <template #next>
-        <CubeSymbol symbol="arrowRight" hover-animation />
-      </template>
-    </Navigation>
+      <Navigation class="bottom-4 fixed inset-x-0">
+        <template #back>
+          <CubeSymbol symbol="arrowLeft" hover-animation />
+        </template>
+        <template #next>
+          <CubeSymbol symbol="arrowRight" hover-animation />
+        </template>
+      </Navigation>
+    </div>
   </div>
 </template>
 
