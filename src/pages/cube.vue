@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex flex-1 justify-center items-center bg-radial from-40% from-zinc-100 to-transparent size-full overflow-hidden">
+  <div class="relative flex flex-1 justify-center items-center bg-white size-full overflow-hidden">
     <div class="flex-1 size-full">
       <Time class="fixed inset-0 size-screen">
         <template #day>

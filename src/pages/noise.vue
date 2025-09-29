@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/component-name-in-template-casing -->
 <template>
-  <div class="relative flex flex-1 justify-center items-center bg-radial from-stone-300 to-transparent size-full overflow-hidden will-change-transform">
+  <div class="relative flex flex-1 justify-center items-center bg-white size-full overflow-hidden will-change-transform">
     <div class="flex-1 size-full noise-bg">
       <Time class="fixed inset-0 size-screen">
         <template #day>
