@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative flex flex-1 justify-center items-center bg-white drop-shadow-md md:drop-shadow-none rounded-lg md:rounded-none size-full">
+    class="relative flex flex-1 justify-center items-center bg-white size-full overflow-hidden">
     <div class="flex-1 size-full">
       <Time class="fixed inset-0 size-screen">
         <template #day>

@@ -1,18 +1,21 @@
 <template>
   <RouterView v-slot="{ Component }">
-    <Transition :name="transitionName">
+    <Transition :name="transitionName" :mode="transitionMode">
       <component :is="Component" />
     </Transition>
   </RouterView>
 </template>
 
 <script setup lang="ts">
+import { breakpointsTailwind } from '@vueuse/core'
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+const { isSmallerOrEqual } = useBreakpoints(breakpointsTailwind)
 const route = useRoute()
 const router = useRouter()
 const transitionName = ref('slide-forward')
+const transitionMode = ref<'default' | 'out-in'>('default')
 
 let previousOrder = route.meta.order || 0
 
@@ -21,6 +24,14 @@ watch(route, (newRoute) => {
   const maxOrder = Math.max(...routes.map(r => (r.meta.order as number) ?? 0))
   const currentOrder = newRoute.meta.order || 0
 
+  if (isSmallerOrEqual('sm')) {
+    transitionName.value = 'fade'
+    transitionMode.value = 'out-in'
+    previousOrder = currentOrder
+    return
+  }
+
+  transitionMode.value = 'default'
   if (currentOrder === 0 && previousOrder === maxOrder) {
     // Wrap-around: last to first (forward)
     transitionName.value = 'slide-forward'
@@ -89,5 +100,18 @@ watch(route, (newRoute) => {
 .slide-backward-leave-to {
   position: absolute;
   right: -100%;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
 }
 </style>

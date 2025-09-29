@@ -12,7 +12,6 @@ declare module 'vue' {
     DotSymbol: typeof import('./../components/DotSymbol.vue')['default']
     DrawnSymbol: typeof import('./../components/DrawnSymbol.vue')['default']
     Icon: typeof import('./../components/Icon.vue')['default']
-    MorphSymbol: typeof import('./../components/MorphSymbol.vue')['default']
     Navigation: typeof import('./../components/Navigation.vue')['default']
     NoiseSymbol: typeof import('./../components/NoiseSymbol.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

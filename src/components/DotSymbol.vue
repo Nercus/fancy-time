@@ -45,7 +45,7 @@ function drawCanvas(step = totalDots) {
       const y = dotGap.value + row * (dotSize.value + dotGap.value)
       const isActive = pattern[row]?.[col] === 1 && dotCount < step
       ctx.beginPath()
-      ctx.fillStyle = isActive ? 'white' : 'transparent'
+      ctx.fillStyle = isActive ? 'black' : 'transparent'
       if (isActive) {
         ctx.arc(
           x + dotSize.value / 2,
