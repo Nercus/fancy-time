@@ -4,6 +4,7 @@ const day = ref<number[]>()
 const hour = ref<number[]>()
 const minute = ref<number[]>()
 const second = ref<number[]>()
+const currentDate = ref(new Date())
 
 const ts = useTimestamp({ interval: 1000 })
 
@@ -13,13 +14,13 @@ export function useTime() {
   }
 
   watch(ts, (newTs) => {
-    const date = new Date(newTs)
-    year.value = splitNumber(date.getFullYear(), 4)
-    month.value = splitNumber(date.getMonth() + 1)
-    day.value = splitNumber(date.getDate())
-    hour.value = splitNumber(date.getHours())
-    minute.value = splitNumber(date.getMinutes())
-    second.value = splitNumber(date.getSeconds())
+    currentDate.value = new Date(newTs)
+    year.value = splitNumber(currentDate.value.getFullYear(), 4)
+    month.value = splitNumber(currentDate.value.getMonth() + 1)
+    day.value = splitNumber(currentDate.value.getDate())
+    hour.value = splitNumber(currentDate.value.getHours())
+    minute.value = splitNumber(currentDate.value.getMinutes())
+    second.value = splitNumber(currentDate.value.getSeconds())
   }, { immediate: true })
-  return { year, month, day, hour, minute, second }
+  return { year, month, day, hour, minute, second, currentDate }
 }
