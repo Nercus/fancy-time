@@ -6,6 +6,16 @@
   </RouterView>
 </template>
 
+<script setup lang="ts">
+const time = useTime()
+const { updateFavicon } = useDynamicFavicon()
+
+// Update favicon when time changes
+watch(time.currentDate, (newDate) => {
+  updateFavicon(newDate)
+}, { immediate: true })
+</script>
+
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

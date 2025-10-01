@@ -177,6 +177,7 @@ declare global {
   const useDots: typeof import('../composables/useDots')['useDots']
   const useDraggable: typeof import('@vueuse/core')['useDraggable']
   const useDropZone: typeof import('@vueuse/core')['useDropZone']
+  const useDynamicFavicon: typeof import('../composables/useDynamicFavicon')['useDynamicFavicon']
   const useElementBounding: typeof import('@vueuse/core')['useElementBounding']
   const useElementByPoint: typeof import('@vueuse/core')['useElementByPoint']
   const useElementHover: typeof import('@vueuse/core')['useElementHover']
