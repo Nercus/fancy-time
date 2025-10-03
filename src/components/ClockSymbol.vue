@@ -1,10 +1,10 @@
 <template>
-  <div class="grid grid-cols-4">
-    <div v-for="(clock, index) in clockRotations" :key="index" class="relative bg-stone-200 shadow rounded-full size-5">
+  <div class="grid grid-cols-4" @mouseenter="startHoverAnimation" @mouseleave="stopHoverAnimation">
+    <div v-for="(clock, index) in displayedRotations" :key="index" class="relative bg-stone-100 shadow-inner rounded-full size-5">
       <div
-        class="top-1/2 left-1/2 absolute bg-black rounded-full w-0.5 h-2.5 origin-bottom transition-transform duration-300 ease-in-out transform" :style="`transform: translate(-50%, -100%) rotate(${clock.hour}deg)`" />
+        class="top-1/2 left-1/2 absolute bg-blue-900 rounded-full w-0.5 h-2.5 origin-bottom transition-transform duration-500 ease-in-out transform" :style="`transform: translate(-50%, -100%) rotate(${clock.hour}deg)`" />
       <div
-        class="top-1/2 left-1/2 absolute bg-black rounded-full w-0.5 h-2.5 origin-bottom transition-transform duration-300 ease-in-out transform" :style="`transform: translate(-50%, -100%) rotate(${(clock.minute)}deg)`" />
+        class="top-1/2 left-1/2 absolute bg-blue-900 rounded-full w-0.5 h-2.5 origin-bottom transition-transform duration-500 ease-in-out transform" :style="`transform: translate(-50%, -100%) rotate(${(clock.minute)}deg)`" />
     </div>
   </div>
 </template>
@@ -14,16 +14,19 @@ import type { SymbolTypes } from '../composables/useDots'
 
 const props = defineProps<{
   symbol: string | number | undefined
+  hoverAnimation?: boolean
 }>()
 
 const rotations = {
-  'horizontal': { hour: 0, minute: 180 },
-  'vertical': { hour: 90, minute: 270 },
-  'top-left': { hour: 180, minute: 270 },
-  'top-right': { hour: 0, minute: 270 },
-  'bottom-left': { hour: 180, minute: 90 },
-  'bottom-right': { hour: 0, minute: 90 },
+  'vertical': { hour: 0, minute: 180 },
+  'horizontal': { hour: 270, minute: 90 },
+  'top-left': { hour: 0, minute: 270 },
+  'top-right': { hour: 0, minute: 90 },
+  'bottom-left': { hour: 180, minute: 270 },
+  'bottom-right': { hour: 180, minute: 90 },
   'default': { hour: 45, minute: 45 },
+  'diagonal-left': { hour: 315, minute: 135 },
+  'diagonal-right': { hour: 45, minute: 225 },
 } as const
 
 const symbols: Record<SymbolTypes, (keyof typeof rotations)[]> = {
@@ -287,11 +290,86 @@ const symbols: Record<SymbolTypes, (keyof typeof rotations)[]> = {
     'horizontal',
     'top-left',
   ],
-  arrowLeft: ['horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal'], // TODO: still a placeholder setup
-  arrowRight: ['horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal'], // TODO: still a placeholder setup
-  colon: ['horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal'], // TODO: still a placeholder setup
-  dash: ['horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal'], // TODO: still a placeholder setup
-  dot: ['horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal', 'horizontal'], // TODO: still a placeholder setup
+  arrowLeft: ['diagonal-right', 'horizontal', 'horizontal', 'horizontal', 'diagonal-left', 'horizontal', 'horizontal', 'horizontal'],
+  arrowRight: ['horizontal', 'horizontal', 'horizontal', 'diagonal-left', 'horizontal', 'horizontal', 'horizontal', 'diagonal-right'],
+  colon: [
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'bottom-right',
+    'bottom-left',
+    'default',
+    'default',
+    'top-right',
+    'top-left',
+    'default',
+    'default',
+    'bottom-right',
+    'bottom-left',
+    'default',
+    'default',
+    'top-right',
+    'top-left',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+  ],
+  dash: [
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'bottom-right',
+    'horizontal',
+    'horizontal',
+    'bottom-left',
+    'top-right',
+    'horizontal',
+    'horizontal',
+    'top-left',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+  ],
+  dot: [
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'default',
+    'bottom-right',
+    'bottom-left',
+    'default',
+    'default',
+    'top-right',
+    'top-left',
+    'default',
+  ],
 }
 
 const clockRotations = computed(() => {
@@ -303,5 +381,61 @@ const clockRotations = computed(() => {
     hour: rotations[key].hour,
     minute: rotations[key].minute,
   }))
+})
+
+const isHovering = ref(false)
+const randomRotations = ref<{ hour: number, minute: number }[]>([])
+let hoverTimeout: number | null = null
+
+const displayedRotations = computed(() => {
+  if (props.hoverAnimation && isHovering.value && randomRotations.value.length > 0) {
+    return randomRotations.value
+  }
+  return clockRotations.value
+})
+
+function generateRandomRotations() {
+  const rotationKeys = Object.keys(rotations) as (keyof typeof rotations)[]
+  return clockRotations.value.map(() => {
+    const randomKey = rotationKeys[Math.floor(Math.random() * rotationKeys.length)]
+    if (!randomKey) {
+      return { hour: 0, minute: 0 }
+    }
+    return {
+      hour: rotations[randomKey].hour,
+      minute: rotations[randomKey].minute,
+    }
+  })
+}
+
+const animationDuration = 500
+
+function startHoverAnimation() {
+  if (!props.hoverAnimation) return
+
+  isHovering.value = true
+  randomRotations.value = generateRandomRotations()
+
+  hoverTimeout = window.setTimeout(() => {
+    randomRotations.value = []
+  }, animationDuration)
+}
+
+function stopHoverAnimation() {
+  if (!props.hoverAnimation) return
+
+  isHovering.value = false
+  randomRotations.value = []
+
+  if (hoverTimeout) {
+    clearTimeout(hoverTimeout)
+    hoverTimeout = null
+  }
+}
+
+onUnmounted(() => {
+  if (hoverTimeout) {
+    clearTimeout(hoverTimeout)
+  }
 })
 </script>
