@@ -52,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-// import ogImage from '../assets/clock.png'
+import ogImage from '../assets/clock.png'
 
 definePage({
   meta: {
@@ -61,17 +61,17 @@ definePage({
 })
 
 useSeoMeta({
-  title: 'Clock Clock',
-  description: 'A clock style clock and date display built with Vue 3 and Tailwind CSS.',
+  title: 'Clock of clocks',
+  description: 'A clock made with multiple clocks built with Vue 3 and Tailwind CSS.',
   ogTitle: 'Clock Clock',
-  ogDescription: 'A clock style clock and date display built with Vue 3 and Tailwind CSS.',
-  // ogImage,
+  ogDescription: 'A clock made with multiple clocks built with Vue 3 and Tailwind CSS.',
+  ogImage,
   ogUrl: 'https://time.wintersperger.dev/clock',
   ogSiteName: 'Nerc\'s clock',
   ogType: 'website',
   twitterTitle: 'Clock Clock',
-  twitterDescription: 'A clock style clock and date display built with Vue 3 and Tailwind CSS.',
-  // twitterImage: ogImage,
+  twitterDescription: 'A clock made with multiple clocks built with Vue 3 and Tailwind CSS.',
+  twitterImage: ogImage,
   twitterCard: 'summary_large_image',
   themeColor: 'white',
 })
